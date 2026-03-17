@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cloudlinker_client_user,cloudlinker.client user,model_cloudlinker_client,group_cloudlinker_user,1,0,0,0
+access_cloudlinker_client_manager,cloudlinker.client manager,model_cloudlinker_client,group_cloudlinker_manager,1,1,1,1
+access_cloudlinker_device_user,cloudlinker.device user,model_cloudlinker_device,group_cloudlinker_user,1,0,0,0
+access_cloudlinker_device_manager,cloudlinker.device manager,model_cloudlinker_device,group_cloudlinker_manager,1,1,1,1
+access_cloudlinker_document_rule_user,cloudlinker.document.rule user,model_cloudlinker_document_rule,group_cloudlinker_user,1,0,0,0
+access_cloudlinker_document_rule_manager,cloudlinker.document.rule manager,model_cloudlinker_document_rule,group_cloudlinker_manager,1,1,1,1
+access_cloudlinker_print_wizard,cloudlinker.print.wizard,model_cloudlinker_print_wizard,group_cloudlinker_user,1,1,1,1

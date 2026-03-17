@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Top-level menu (Technical section) -->
+    <menuitem id="menu_cloudlinker_root"
+              name="CloudLinker"
+              sequence="90"
+              web_icon="cloudlinker_print,static/description/icon.png"
+              groups="cloudlinker_print.group_cloudlinker_user"/>
+
+    <menuitem id="menu_cloudlinker_clients"
+              name="Clients"
+              parent="menu_cloudlinker_root"
+              action="action_cloudlinker_client"
+              sequence="10"/>
+
+    <menuitem id="menu_cloudlinker_devices"
+              name="Printers"
+              parent="menu_cloudlinker_root"
+              action="action_cloudlinker_device"
+              sequence="20"/>
+
+    <menuitem id="menu_cloudlinker_rules"
+              name="Document Rules"
+              parent="menu_cloudlinker_root"
+              action="action_cloudlinker_document_rule"
+              sequence="30"/>
+</odoo>

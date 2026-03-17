@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; margin: 0; padding: 0; }
+        .banner { width: 100%; max-width: 760px; display: block; margin: 0 auto 32px; }
+        h1 { color: #1e40af; font-size: 26px; margin-bottom: 6px; }
+        h2 { color: #1e40af; font-size: 19px; border-bottom: 2px solid #dbeafe; padding-bottom: 6px; margin-top: 32px; }
+        h3 { color: #1d4ed8; font-size: 15px; margin-bottom: 4px; }
+        p, li { font-size: 14px; line-height: 1.65; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 4px; }
+        .features { display: flex; flex-wrap: wrap; gap: 16px; margin: 20px 0; }
+        .feature-card {
+            flex: 1 1 200px;
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            border-radius: 6px;
+            padding: 14px 16px;
+        }
+        .feature-card h3 { margin: 0 0 6px; }
+        .feature-card p  { margin: 0; color: #555; }
+        .steps { counter-reset: step; display: flex; flex-wrap: wrap; gap: 16px; margin: 20px 0; }
+        .step {
+            flex: 1 1 180px;
+            background: #f0fdf4;
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-left: 4px solid #16a34a;
+        }
+        .step::before {
+            counter-increment: step;
+            content: "Step " counter(step);
+            display: block;
+            font-weight: bold;
+            color: #16a34a;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .step h3 { margin: 0 0 4px; color: #166534; }
+        .step p  { margin: 0; font-size: 13px; color: #555; }
+        .pricing-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+        .pricing-table th { background: #1e40af; color: white; padding: 8px 12px; text-align: left; }
+        .pricing-table td { padding: 7px 12px; border-bottom: 1px solid #e5e7eb; }
+        .pricing-table tr:nth-child(even) td { background: #f8faff; }
+        .badge {
+            display: inline-block; background: #dbeafe; color: #1e40af;
+            border-radius: 12px; padding: 2px 10px; font-size: 12px;
+            font-weight: bold; margin: 2px;
+        }
+        .note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 4px; font-size: 13px; }
+        code { background: #f1f5f9; padding: 1px 5px; border-radius: 3px; font-size: 12px; color: #1e40af; }
+    </style>
+</head>
+<body>
+
+<img class="banner" src="banner.png" alt="CloudLinker Print Banner"/>
+
+<h1>CloudLinker Print</h1>
+<p>
+    <span class="badge">Odoo 16</span>
+    <span class="badge">Odoo 17</span>
+    <span class="badge">Odoo 18</span>
+    <span class="badge">Printing</span>
+    <span class="badge">Automation</span>
+</p>
+
+<p>
+    <strong>CloudLinker Print</strong> connects your Odoo instance to the
+    <a href="https://cloudlinker.eu" target="_blank">CloudLinker</a> cloud-to-local print service.
+    Trigger print jobs on any locally connected printer — directly from Odoo — without VPNs,
+    without exposing your network, and without installing print drivers on the server.
+</p>
+
+<h2>What is CloudLinker?</h2>
+<p>
+    CloudLinker is a lightweight SaaS platform that bridges cloud applications and local devices.
+    A small agent runs on a Windows or Linux machine, registers its connected printers, and polls
+    CloudLinker for pending jobs. When a job arrives, it downloads the PDF from the provided URL
+    and sends it to the target printer — all without requiring any inbound firewall ports.
+</p>
+
+<h2>Features</h2>
+<div class="features">
+    <div class="feature-card">
+        <h3>🖨️ Cloud Print</h3>
+        <p>Send documents to any printer connected to a CloudLinker client agent — from anywhere.</p>
+    </div>
+    <div class="feature-card">
+        <h3>📄 All Document Types</h3>
+        <p>Invoices, credit notes, picking slips, shipping labels, custom QWeb reports, and POS receipts.</p>
+    </div>
+    <div class="feature-card">
+        <h3>🎯 Default Printer Rules</h3>
+        <p>Assign a default printer per document type. Override manually at print time via wizard.</p>
+    </div>
+    <div class="feature-card">
+        <h3>⚙️ Auto-Print on Validate</h3>
+        <p>Optionally trigger automatic printing when an invoice is posted or a picking is validated.</p>
+    </div>
+    <div class="feature-card">
+        <h3>🔄 Printer Sync</h3>
+        <p>Sync your clients and printers from CloudLinker with one click — no manual entry needed.</p>
+    </div>
+    <div class="feature-card">
+        <h3>🔒 Secure by Design</h3>
+        <p>No inbound ports required. The CloudLinker agent initiates all outbound connections.</p>
+    </div>
+</div>
+
+<h2>How It Works</h2>
+<div class="steps">
+    <div class="step">
+        <h3>Configure</h3>
+        <p>Enter your CloudLinker Organization ID and API key in <em>Settings → CloudLinker</em>.</p>
+    </div>
+    <div class="step">
+        <h3>Sync Printers</h3>
+        <p>Click <em>Sync Printers</em> to pull all clients and devices from your CloudLinker account.</p>
+    </div>
+    <div class="step">
+        <h3>Set Rules</h3>
+        <p>Go to <em>CloudLinker → Document Rules</em> and assign a default printer per document type.</p>
+    </div>
+    <div class="step">
+        <h3>Print</h3>
+        <p>Use the <em>Print via CloudLinker</em> button on any invoice, picking, or POS order.</p>
+    </div>
+</div>
+
+<h2>Supported Document Types</h2>
+<ul>
+    <li><strong>Invoices &amp; Credit Notes</strong> — triggered from the invoice form view</li>
+    <li><strong>Picking / Warehouse Labels</strong> — triggered from stock.picking</li>
+    <li><strong>Shipping Labels</strong> — triggered from stock.picking (separate rule)</li>
+    <li><strong>Custom QWeb Reports</strong> — any <code>ir.actions.report</code> can be linked to a rule</li>
+    <li><strong>POS Receipts</strong> — triggered from pos.order</li>
+</ul>
+
+<h2>CloudLinker Pricing</h2>
+<p>A CloudLinker account is required. Plans start from free:</p>
+<table class="pricing-table">
+    <thead>
+        <tr><th>Plan</th><th>Price</th><th>Jobs/day</th><th>Jobs/month</th><th>Clients</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Free</td><td>€ 0/mo</td><td>5</td><td>50</td><td>5</td></tr>
+        <tr><td>Basic</td><td>€ 4.99/mo</td><td>50</td><td>1,000</td><td>20</td></tr>
+        <tr><td>Intermediate</td><td>€ 6.99/mo</td><td>150</td><td>3,000</td><td>50</td></tr>
+        <tr><td>Advanced</td><td>€ 9.99/mo</td><td>500</td><td>10,000</td><td>150</td></tr>
+    </tbody>
+</table>
+<p>Register at <a href="https://cloudlinker.eu/register" target="_blank">cloudlinker.eu/register</a> — 30-day free trial, no credit card required.</p>
+
+<h2>Configuration</h2>
+<ol>
+    <li>Install the <strong>CloudLinker agent</strong> on each computer with a local printer
+        (<a href="https://cloudlinker.eu/downloads" target="_blank">Download here</a>).</li>
+    <li>In Odoo, go to <strong>Settings → CloudLinker</strong> and fill in your
+        <em>Organization ID</em> and <em>API Key</em> (found in your CloudLinker dashboard).</li>
+    <li>Click <strong>Test Connection</strong> to verify.</li>
+    <li>Click <strong>Sync Printers</strong> to import your clients and printers.</li>
+    <li>Go to <strong>CloudLinker → Document Rules</strong> and configure the default printer
+        for each document type.</li>
+</ol>
+
+<div class="note">
+    <strong>⚠️ Note:</strong> The document URL sent to the CloudLinker agent must be reachable
+    from the machine running the agent. If your Odoo server is on an internal network,
+    make sure the <code>web.base.url</code> system parameter points to a URL accessible
+    from those machines.
+</div>
+
+<h2>Technical Details</h2>
+<ul>
+    <li>Uses the CloudLinker REST API with HTTP Basic Authentication</li>
+    <li>PDF is rendered by Odoo and temporarily stored as an <code>ir.attachment</code></li>
+    <li>A secure one-time token URL is generated; the attachment is deleted after download</li>
+    <li>No base64 encoding — CloudLinker fetches the PDF directly via URL</li>
+    <li>Compatible with Odoo 16, 17, and 18 Community &amp; Enterprise</li>
+</ul>
+
+<h2>Support</h2>
+<p>
+    Questions or issues? Contact us via
+    <a href="https://cloudlinker.eu/contact" target="_blank">cloudlinker.eu/contact</a>
+    or email <a href="mailto:support@cloudlinker.com">support@cloudlinker.com</a>.
+</p>
+
+</body>
+</html>

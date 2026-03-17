@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Default rules (no printer assigned yet — user must configure) -->
+    <record id="rule_invoice" model="cloudlinker.document.rule">
+        <field name="document_type">invoice</field>
+        <field name="copies">1</field>
+    </record>
+    <record id="rule_picking" model="cloudlinker.document.rule">
+        <field name="document_type">picking</field>
+        <field name="copies">1</field>
+    </record>
+    <record id="rule_shipping_label" model="cloudlinker.document.rule">
+        <field name="document_type">shipping_label</field>
+        <field name="copies">1</field>
+    </record>
+    <record id="rule_pos_receipt" model="cloudlinker.document.rule">
+        <field name="document_type">pos_receipt</field>
+        <field name="copies">1</field>
+    </record>
+</odoo>

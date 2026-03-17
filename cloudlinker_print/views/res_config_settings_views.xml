@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_cloudlinker" model="ir.ui.view">
+        <field name="name">res.config.settings.view.cloudlinker</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.action_general_configuration"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="before">
+                <div class="app_settings_block" data-string="CloudLinker" string="CloudLinker"
+                     data-key="cloudlinker_print" id="cloudlinker_settings">
+                    <h2>CloudLinker Print</h2>
+                    <div class="row mt16 o_settings_container">
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Organization ID</span>
+                                <div class="text-muted">
+                                    Found in your CloudLinker account settings.
+                                </div>
+                                <div class="content-group mt8">
+                                    <field name="cloudlinker_organization_id"
+                                           placeholder="0197df47-871f-72d1-95df-2bfb0c18529a"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">API Key</span>
+                                <div class="text-muted">Your CloudLinker API key.</div>
+                                <div class="content-group mt8">
+                                    <field name="cloudlinker_api_key" password="True"
+                                           placeholder="••••••••••••••••"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">API Base URL</span>
+                                <div class="text-muted">Leave default unless self-hosting.</div>
+                                <div class="content-group mt8">
+                                    <field name="cloudlinker_base_url"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="cloudlinker_auto_print"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="cloudlinker_auto_print"/>
+                                <div class="text-muted">
+                                    Automatically print when a document is validated.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row mt8">
+                        <div class="col-12">
+                            <button name="action_cloudlinker_test_connection" type="object"
+                                    string="Test Connection" class="btn btn-secondary me-2"/>
+                            <button name="action_cloudlinker_sync_devices" type="object"
+                                    string="Sync Clients &amp; Printers" class="btn btn-secondary"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
