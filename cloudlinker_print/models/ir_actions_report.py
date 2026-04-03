@@ -14,6 +14,10 @@ class IrActionsReport(models.Model):
         """
         result = super()._render_qweb_pdf(report_ref, res_ids=res_ids, data=data)
 
+        # Prevent recursion: cloudlinker_print() calls _render_qweb_pdf internally
+        if self.env.context.get("cloudlinker_rendering"):
+            return result
+
         ICP = self.env["ir.config_parameter"].sudo()
         if not ICP.get_param("cloudlinker_print.auto_print"):
             return result

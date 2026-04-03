@@ -50,13 +50,6 @@ class CloudLinkerPdfController(http.Controller):
         pdf_data = attachment.raw or b""
         filename = attachment.name or "document.pdf"
 
-        # Delete attachment immediately after serving (one-time use)
-        try:
-            attachment.sudo().unlink()
-            _logger.debug("CloudLinker: served and deleted attachment for token %s", token)
-        except Exception:
-            _logger.exception("CloudLinker: could not delete attachment for token %s", token)
-
         return Response(
             pdf_data,
             status=200,

@@ -6,15 +6,14 @@ class AccountMove(models.Model):
     _inherit = ["account.move", "cloudlinker.mixin"]
 
     def _cloudlinker_default_report(self):
-        return self.env.ref("account.action_account_original_vendor_bill", raise_if_not_found=False) \
-            or self.env.ref("account.action_move_out_invoice_type", raise_if_not_found=False)
+        return self.env.ref("account.account_invoices", raise_if_not_found=False)
 
     def _cloudlinker_job_title(self) -> str:
         return f"Invoice {self.name or self.id}"
 
     def action_cloudlinker_print_invoice(self):
         """Button action: open wizard to print this invoice via CloudLinker."""
-        return self.action_cloudlinker_print_wizard("invoice", "account.action_account_original_vendor_bill")
+        return self.action_cloudlinker_print_wizard("invoice")
 
     @api.model
     def _cloudlinker_auto_print_on_post(self):

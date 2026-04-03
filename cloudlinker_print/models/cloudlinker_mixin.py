@@ -1,4 +1,6 @@
+import hashlib
 import logging
+import secrets
 from odoo import _, api, models
 from odoo.exceptions import UserError
 from ..services import CloudLinkerService, CloudLinkerApiError
@@ -124,9 +126,9 @@ class CloudLinkerMixin(models.AbstractModel):
 
     def _cloudlinker_get_report_url(self, report_ref: str = None) -> str:
         """
-        Return a URL pointing to the rendered PDF that the CloudLinker
-        agent can fetch.  Uses Odoo's /report/pdf/ route with a download
-        access token so no login is required.
+        Render the PDF, store it as an ir.attachment with a random token,
+        and return a public URL that the CloudLinker agent can fetch
+        without any Odoo session or authentication.
         """
         if report_ref:
             report = self.env.ref(report_ref)
@@ -135,22 +137,27 @@ class CloudLinkerMixin(models.AbstractModel):
         if not report:
             raise UserError(_("No report found for this document."))
 
-        # Build the report URL using the base URL from system parameters
+        # Render the PDF server-side (with context flag to prevent recursion)
+        pdf_content, _content_type = report.sudo().with_context(
+            cloudlinker_rendering=True
+        )._render_qweb_pdf(
+            report.report_name, res_ids=self.ids
+        )
+
+        # Generate a unique token
+        token = secrets.token_hex(32)
+
+        # Store as attachment with the token in the description
+        self.env["ir.attachment"].sudo().create({
+            "name": f"{self._cloudlinker_job_title()}.pdf",
+            "type": "binary",
+            "raw": pdf_content,
+            "mimetype": "application/pdf",
+            "description": f"cloudlinker_token:{token}",
+        })
+
+        # Build the public URL
         ICP = self.env["ir.config_parameter"].sudo()
         base_url = ICP.get_param("web.base.url", "http://localhost:8069")
 
-        # Generate a download token valid for this record
-        # Odoo's report controller accepts ?download=1 — for auth we use
-        # the access_token field if available, or fall back to session-less
-        # download which works on networks where Odoo is reachable.
-        record_ids = ",".join(str(i) for i in self.ids)
-        url = (
-            f"{base_url}/report/pdf/{report.report_name}/{record_ids}"
-        )
-
-        # If the model has an access_token field (e.g. sale.order, account.move)
-        # append it so the CloudLinker agent can download without logging in.
-        if hasattr(self, "access_token") and self.access_token:
-            url += f"?access_token={self.access_token}"
-
-        return url
+        return f"{base_url}/cloudlinker/pdf/{token}"
