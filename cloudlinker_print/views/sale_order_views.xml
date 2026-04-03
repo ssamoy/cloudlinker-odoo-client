@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_cloudlinker" model="ir.ui.view">
+        <field name="name">sale.order.form.cloudlinker</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_cloudlinker_print_quotation"
+                        type="object"
+                        string="Print via CloudLinker"
+                        icon="fa-print"
+                        class="btn-secondary"
+                        groups="cloudlinker_print.group_cloudlinker_user"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

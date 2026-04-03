@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
+    <!-- Default config parameters -->
+    <record id="cloudlinker_base_url_default" model="ir.config_parameter">
+        <field name="key">cloudlinker_print.base_url</field>
+        <field name="value">https://cloudlinker.eu/api</field>
+    </record>
+    <record id="cloudlinker_organization_id_default" model="ir.config_parameter">
+        <field name="key">cloudlinker_print.organization_id</field>
+        <field name="value"></field>
+    </record>
+    <record id="cloudlinker_api_key_default" model="ir.config_parameter">
+        <field name="key">cloudlinker_print.api_key</field>
+        <field name="value"></field>
+    </record>
+
     <!-- Default rules (no printer assigned yet — user must configure) -->
     <record id="rule_invoice" model="cloudlinker.document.rule">
         <field name="document_type">invoice</field>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form_cloudlinker" model="ir.ui.view">
+        <field name="name">account.move.form.cloudlinker</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_cloudlinker_print_invoice"
+                        type="object"
+                        string="Print via CloudLinker"
+                        icon="fa-print"
+                        class="btn-secondary"
+                        groups="cloudlinker_print.group_cloudlinker_user"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

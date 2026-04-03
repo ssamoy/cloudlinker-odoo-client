@@ -16,7 +16,15 @@ class CloudLinkerPrintWizard(models.TransientModel):
         comodel_name="cloudlinker.device",
         string="Printer",
         required=True,
+        default=lambda self: self._default_device(),
     )
+
+    @api.model
+    def _default_device(self):
+        devices = self.env["cloudlinker.device"].search([], limit=2)
+        if len(devices) == 1:
+            return devices.id
+        return False
     copies = fields.Integer(string="Copies", default=1)
 
     def action_print(self):

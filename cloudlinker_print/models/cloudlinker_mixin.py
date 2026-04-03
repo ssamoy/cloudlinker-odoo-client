@@ -58,12 +58,14 @@ class CloudLinkerMixin(models.AbstractModel):
         """Open the manual printer-selection wizard for this record."""
         self.ensure_one()
         rule = self._cloudlinker_get_rule(document_type)
+        device = (rule.device_id if rule and rule.device_id
+                  else self.env["cloudlinker.device"].search([], limit=1))
         wizard = self.env["cloudlinker.print.wizard"].create({
             "res_model": self._name,
             "res_id": self.id,
             "document_type": document_type,
             "report_ref": report_ref or "",
-            "device_id": rule.device_id.id if rule and rule.device_id else False,
+            "device_id": device.id if device else False,
             "copies": rule.copies if rule else 1,
         })
         return {

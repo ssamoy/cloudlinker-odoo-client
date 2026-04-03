@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: odoo
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - odoo-db:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  odoo:
+    image: odoo:18.0
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: odoo
+    volumes:
+      # Mount custom module
+      - ./cloudlinker_print:/mnt/extra-addons/cloudlinker_print
+      # Persistent Odoo data
+      - odoo-data:/var/lib/odoo
+    command: >
+      -- --dev=all
+
+volumes:
+  odoo-db:
+  odoo-data:

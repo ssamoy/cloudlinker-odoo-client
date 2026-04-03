@@ -4,6 +4,7 @@ DOCUMENT_TYPES = [
     ("invoice", "Invoice / Credit Note"),
     ("picking", "Picking / Warehouse Label"),
     ("shipping_label", "Shipping Label"),
+    ("quotation", "Quotation / Sale Order"),
     ("qweb_report", "QWeb Report"),
     ("pos_receipt", "POS Receipt"),
 ]

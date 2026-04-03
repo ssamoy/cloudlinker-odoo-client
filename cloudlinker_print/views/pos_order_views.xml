@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_order_form_cloudlinker" model="ir.ui.view">
+        <field name="name">pos.order.form.cloudlinker</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_cloudlinker_print_receipt"
+                        type="object"
+                        string="Print Receipt via CloudLinker"
+                        icon="fa-print"
+                        class="btn-secondary"
+                        groups="cloudlinker_print.group_cloudlinker_user"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
