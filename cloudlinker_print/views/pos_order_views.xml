@@ -8,7 +8,8 @@
             <xpath expr="//header" position="inside">
                 <button name="action_cloudlinker_print_receipt"
                         type="object"
-                        string="Print Receipt via CloudLinker"
+                        string="Print"
+                        title="Print via CloudLinker"
                         icon="fa-print"
                         class="btn-secondary"
                         groups="cloudlinker_print.group_cloudlinker_user"/>

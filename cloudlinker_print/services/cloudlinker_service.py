@@ -151,6 +151,62 @@ class CloudLinkerService:
         return resp.get("data", [])
 
     # ------------------------------------------------------------------
+    # Static helpers (no auth required)
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def login(base_url, email, password):
+        """POST /auth/login — returns {organization_id, api_key, organization_name, plan}"""
+        url = f"{base_url.rstrip('/')}/auth/login"
+        try:
+            resp = requests.post(url, json={"email": email, "password": password}, timeout=15)
+            resp.raise_for_status()
+            return resp.json()
+        except requests.HTTPError as exc:
+            body = exc.response.json() if exc.response.content else {}
+            msg = body.get("message", exc.response.text)
+            raise CloudLinkerApiError(f"Login failed: {msg}") from exc
+        except requests.RequestException as exc:
+            raise CloudLinkerApiError(f"Connection error: {exc}") from exc
+
+    @staticmethod
+    def get_plans(base_url):
+        """GET /plans — returns list of active plans"""
+        url = f"{base_url.rstrip('/')}/plans"
+        try:
+            resp = requests.get(url, timeout=10)
+            resp.raise_for_status()
+            return resp.json().get("data", [])
+        except requests.HTTPError as exc:
+            raise CloudLinkerApiError(f"Failed to fetch plans: {exc.response.text}") from exc
+        except requests.RequestException as exc:
+            raise CloudLinkerApiError(f"Connection error: {exc}") from exc
+
+    @staticmethod
+    def register(base_url, email, password, firstname, lastname, company, plan_id):
+        """POST /auth/register — returns {organization_id, api_key, ...}"""
+        url = f"{base_url.rstrip('/')}/auth/register"
+        payload = {
+            "email": email,
+            "password": password,
+            "firstname": firstname,
+            "lastname": lastname,
+            "company": company or "",
+            "plan_id": plan_id,
+            "referrer": "odoo",
+        }
+        try:
+            resp = requests.post(url, json=payload, timeout=15)
+            resp.raise_for_status()
+            return resp.json()
+        except requests.HTTPError as exc:
+            body = exc.response.json() if exc.response.content else {}
+            msg = body.get("message", "") or str(body.get("messages", exc.response.text))
+            raise CloudLinkerApiError(f"Registration failed: {msg}") from exc
+        except requests.RequestException as exc:
+            raise CloudLinkerApiError(f"Connection error: {exc}") from exc
+
+    # ------------------------------------------------------------------
     # Internals
     # ------------------------------------------------------------------
 

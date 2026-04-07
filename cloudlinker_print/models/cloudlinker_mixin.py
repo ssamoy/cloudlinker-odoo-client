@@ -28,19 +28,21 @@ class CloudLinkerMixin(models.AbstractModel):
     # Public API
     # ------------------------------------------------------------------
 
-    def cloudlinker_print(self, document_type: str, report_ref: str = None, device_id: int = None):
+    def cloudlinker_print(self, document_type: str, report_ref: str = None, device_id: int = None, copies: int = None):
         """
         Render document and send a print job to CloudLinker.
 
         :param document_type: key from cloudlinker.document.rule selection
         :param report_ref:    optional external ID of ir.actions.report
         :param device_id:     cloudlinker.device record ID; falls back to document rule default
+        :param copies:        number of copies; falls back to document rule default
         """
         self.ensure_one()
         svc = self._cloudlinker_get_service()
         device = self._cloudlinker_resolve_device(document_type, device_id)
-        rule = self._cloudlinker_get_rule(document_type)
-        copies = rule.copies if rule else 1
+        if copies is None:
+            rule = self._cloudlinker_get_rule(document_type)
+            copies = rule.copies if rule else 1
 
         doc_url = self._cloudlinker_get_report_url(report_ref)
         try:
@@ -147,7 +149,9 @@ class CloudLinkerMixin(models.AbstractModel):
         # Generate a unique token
         token = secrets.token_hex(32)
 
-        # Store as attachment with the token in the description
+        # Store as attachment with the token in the description.
+        # We must flush and commit so the attachment is visible to the
+        # CloudLinker agent when it immediately fetches the PDF URL.
         self.env["ir.attachment"].sudo().create({
             "name": f"{self._cloudlinker_job_title()}.pdf",
             "type": "binary",
@@ -155,6 +159,8 @@ class CloudLinkerMixin(models.AbstractModel):
             "mimetype": "application/pdf",
             "description": f"cloudlinker_token:{token}",
         })
+        self.env.cr.flush()
+        self.env.cr.commit()
 
         # Build the public URL
         ICP = self.env["ir.config_parameter"].sudo()

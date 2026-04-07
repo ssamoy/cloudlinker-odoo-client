@@ -37,6 +37,7 @@ class CloudLinkerPrintWizard(models.TransientModel):
             document_type=self.document_type,
             report_ref=self.report_ref or None,
             device_id=self.device_id.id,
+            copies=self.copies,
         )
         return {
             "type": "ir.actions.client",
@@ -48,5 +49,6 @@ class CloudLinkerPrintWizard(models.TransientModel):
                 ),
                 "type": "success",
                 "sticky": False,
+                "next": {"type": "ir.actions.act_window_close"},
             },
         }

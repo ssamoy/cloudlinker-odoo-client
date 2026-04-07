@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from ..services import CloudLinkerService, CloudLinkerApiError
 
@@ -35,6 +35,36 @@ class ResConfigSettings(models.TransientModel):
             return CloudLinkerService(org_id, api_key, base_url)
         except CloudLinkerApiError as exc:
             raise UserError(str(exc)) from exc
+
+    def action_cloudlinker_login_wizard(self):
+        """Open login wizard."""
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Login with CloudLinker"),
+            "res_model": "cloudlinker.login.wizard",
+            "view_mode": "form",
+            "target": "new",
+        }
+
+    def action_cloudlinker_register_wizard(self):
+        """Open registration wizard."""
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Create CloudLinker Account"),
+            "res_model": "cloudlinker.register.wizard",
+            "view_mode": "form",
+            "target": "new",
+        }
+
+    def action_cloudlinker_clear_settings(self):
+        """Clear organization ID and API key."""
+        ICP = self.env["ir.config_parameter"].sudo()
+        ICP.set_param("cloudlinker_print.organization_id", "")
+        ICP.set_param("cloudlinker_print.api_key", "")
+        return {
+            "type": "ir.actions.client",
+            "tag": "reload",
+        }
 
     def action_cloudlinker_test_connection(self):
         self.ensure_one()

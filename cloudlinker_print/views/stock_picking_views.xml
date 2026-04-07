@@ -8,13 +8,15 @@
             <xpath expr="//header" position="inside">
                 <button name="action_cloudlinker_print_picking"
                         type="object"
-                        string="Print Picking"
+                        string="Print"
+                        title="Print via CloudLinker"
                         icon="fa-print"
                         class="btn-secondary"
                         groups="cloudlinker_print.group_cloudlinker_user"/>
                 <button name="action_cloudlinker_print_shipping_label"
                         type="object"
-                        string="Print Label"
+                        string="Label"
+                        title="Print label via CloudLinker"
                         icon="fa-tag"
                         class="btn-secondary"
                         groups="cloudlinker_print.group_cloudlinker_user"/>

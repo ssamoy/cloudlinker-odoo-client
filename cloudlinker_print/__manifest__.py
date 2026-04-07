@@ -46,6 +46,8 @@ Compatibility: Odoo 16, 17, 18
         'views/cloudlinker_printer_views.xml',
         'views/cloudlinker_document_rule_views.xml',
         'views/cloudlinker_print_wizard_views.xml',
+        'views/cloudlinker_login_wizard_views.xml',
+        'views/cloudlinker_register_wizard_views.xml',
         'views/account_move_views.xml',
         'views/stock_picking_views.xml',
         'views/sale_order_views.xml',

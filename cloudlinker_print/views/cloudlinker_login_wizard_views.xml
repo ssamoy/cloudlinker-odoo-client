@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="cloudlinker_login_wizard_view_form" model="ir.ui.view">
+        <field name="name">cloudlinker.login.wizard.view.form</field>
+        <field name="model">cloudlinker.login.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Login with CloudLinker">
+                <group>
+                    <field name="email" widget="email"/>
+                    <field name="password" password="True"/>
+                </group>
+                <footer>
+                    <button name="action_login" type="object"
+                            string="Login" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
