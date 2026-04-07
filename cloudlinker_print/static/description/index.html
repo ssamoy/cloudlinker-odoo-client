@@ -59,8 +59,6 @@
 
 <h1>CloudLinker Print</h1>
 <p>
-    <span class="badge">Odoo 16</span>
-    <span class="badge">Odoo 17</span>
     <span class="badge">Odoo 18</span>
     <span class="badge">Printing</span>
     <span class="badge">Automation</span>
@@ -69,7 +67,7 @@
 <p>
     <strong>CloudLinker Print</strong> connects your Odoo instance to the
     <a href="https://cloudlinker.eu" target="_blank">CloudLinker</a> cloud-to-local print service.
-    Trigger print jobs on any locally connected printer — directly from Odoo — without VPNs,
+    Trigger print jobs on any locally connected printer &mdash; directly from Odoo &mdash; without VPNs,
     without exposing your network, and without installing print drivers on the server.
 </p>
 
@@ -78,34 +76,42 @@
     CloudLinker is a lightweight SaaS platform that bridges cloud applications and local devices.
     A small agent runs on a Windows or Linux machine, registers its connected printers, and polls
     CloudLinker for pending jobs. When a job arrives, it downloads the PDF from the provided URL
-    and sends it to the target printer — all without requiring any inbound firewall ports.
+    and sends it to the target printer &mdash; all without requiring any inbound firewall ports.
 </p>
 
 <h2>Features</h2>
 <div class="features">
     <div class="feature-card">
-        <h3>🖨️ Cloud Print</h3>
-        <p>Send documents to any printer connected to a CloudLinker client agent — from anywhere.</p>
+        <h3>Cloud Print</h3>
+        <p>Send documents to any printer connected to a CloudLinker client agent &mdash; from anywhere.</p>
     </div>
     <div class="feature-card">
-        <h3>📄 All Document Types</h3>
-        <p>Invoices, credit notes, picking slips, shipping labels, custom QWeb reports, and POS receipts.</p>
+        <h3>All Document Types</h3>
+        <p>Invoices, credit notes, sale orders, picking slips, shipping labels, custom QWeb reports, and POS receipts.</p>
     </div>
     <div class="feature-card">
-        <h3>🎯 Default Printer Rules</h3>
+        <h3>Default Printer Rules</h3>
         <p>Assign a default printer per document type. Override manually at print time via wizard.</p>
     </div>
     <div class="feature-card">
-        <h3>⚙️ Auto-Print on Validate</h3>
+        <h3>Auto-Print on Validate</h3>
         <p>Optionally trigger automatic printing when an invoice is posted or a picking is validated.</p>
     </div>
     <div class="feature-card">
-        <h3>🔄 Printer Sync</h3>
-        <p>Sync your clients and printers from CloudLinker with one click — no manual entry needed.</p>
+        <h3>Printer Sync</h3>
+        <p>Sync your clients and printers from CloudLinker with one click &mdash; no manual entry needed.</p>
     </div>
     <div class="feature-card">
-        <h3>🔒 Secure by Design</h3>
+        <h3>Quick Setup</h3>
+        <p>Login or register directly from Odoo settings. Download the CloudLinker client without leaving Odoo.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Secure by Design</h3>
         <p>No inbound ports required. The CloudLinker agent initiates all outbound connections.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Client Downloads</h3>
+        <p>Download the latest CloudLinker client for Windows or Linux directly from the settings page.</p>
     </div>
 </div>
 
@@ -113,7 +119,11 @@
 <div class="steps">
     <div class="step">
         <h3>Configure</h3>
-        <p>Enter your CloudLinker Organization ID and API key in <em>Settings → CloudLinker</em>.</p>
+        <p>Login or register from <em>Settings &rarr; CloudLinker</em>, or enter your Organization ID and API key manually.</p>
+    </div>
+    <div class="step">
+        <h3>Install Agent</h3>
+        <p>Download the CloudLinker client for Windows or Linux from the settings page and install it on your print machine.</p>
     </div>
     <div class="step">
         <h3>Sync Printers</h3>
@@ -121,21 +131,22 @@
     </div>
     <div class="step">
         <h3>Set Rules</h3>
-        <p>Go to <em>CloudLinker → Document Rules</em> and assign a default printer per document type.</p>
+        <p>Go to <em>CloudLinker &rarr; Document Rules</em> and assign a default printer per document type.</p>
     </div>
     <div class="step">
         <h3>Print</h3>
-        <p>Use the <em>Print via CloudLinker</em> button on any invoice, picking, or POS order.</p>
+        <p>Use the <em>Print</em> button on any invoice, sale order, picking, or POS order.</p>
     </div>
 </div>
 
 <h2>Supported Document Types</h2>
 <ul>
-    <li><strong>Invoices &amp; Credit Notes</strong> — triggered from the invoice form view</li>
-    <li><strong>Picking / Warehouse Labels</strong> — triggered from stock.picking</li>
-    <li><strong>Shipping Labels</strong> — triggered from stock.picking (separate rule)</li>
-    <li><strong>Custom QWeb Reports</strong> — any <code>ir.actions.report</code> can be linked to a rule</li>
-    <li><strong>POS Receipts</strong> — triggered from pos.order</li>
+    <li><strong>Invoices &amp; Credit Notes</strong> &mdash; triggered from the invoice form view</li>
+    <li><strong>Sale Orders &amp; Quotations</strong> &mdash; triggered from the sale order form view</li>
+    <li><strong>Picking / Warehouse Labels</strong> &mdash; triggered from stock.picking</li>
+    <li><strong>Shipping Labels</strong> &mdash; triggered from stock.picking (separate rule)</li>
+    <li><strong>Custom QWeb Reports</strong> &mdash; any <code>ir.actions.report</code> can be linked to a rule</li>
+    <li><strong>POS Receipts</strong> &mdash; triggered from pos.order</li>
 </ul>
 
 <h2>CloudLinker Pricing</h2>
@@ -145,28 +156,30 @@
         <tr><th>Plan</th><th>Price</th><th>Jobs/day</th><th>Jobs/month</th><th>Clients</th></tr>
     </thead>
     <tbody>
-        <tr><td>Free</td><td>€ 0/mo</td><td>5</td><td>50</td><td>5</td></tr>
-        <tr><td>Basic</td><td>€ 4.99/mo</td><td>50</td><td>1,000</td><td>20</td></tr>
-        <tr><td>Intermediate</td><td>€ 6.99/mo</td><td>150</td><td>3,000</td><td>50</td></tr>
-        <tr><td>Advanced</td><td>€ 9.99/mo</td><td>500</td><td>10,000</td><td>150</td></tr>
+        <tr><td>Free</td><td>Free</td><td>5</td><td>50</td><td>5</td></tr>
+        <tr><td>Basic</td><td>&euro; 4.99/mo</td><td>50</td><td>1,000</td><td>20</td></tr>
+        <tr><td>Intermediate</td><td>&euro; 6.99/mo</td><td>150</td><td>3,000</td><td>50</td></tr>
+        <tr><td>Advanced</td><td>&euro; 9.99/mo</td><td>500</td><td>10,000</td><td>150</td></tr>
     </tbody>
 </table>
-<p>Register at <a href="https://cloudlinker.eu/register" target="_blank">cloudlinker.eu/register</a> — 30-day free trial, no credit card required.</p>
+<p>Register directly from Odoo or at <a href="https://cloudlinker.eu/register" target="_blank">cloudlinker.eu/register</a> &mdash; 30-day free trial, no credit card required.</p>
 
 <h2>Configuration</h2>
 <ol>
-    <li>Install the <strong>CloudLinker agent</strong> on each computer with a local printer
-        (<a href="https://cloudlinker.eu/downloads" target="_blank">Download here</a>).</li>
-    <li>In Odoo, go to <strong>Settings → CloudLinker</strong> and fill in your
-        <em>Organization ID</em> and <em>API Key</em> (found in your CloudLinker dashboard).</li>
+    <li>In Odoo, go to <strong>Settings &rarr; CloudLinker</strong> and click <strong>Login</strong> or
+        <strong>Create Account</strong> to connect your CloudLinker account. You can also enter your
+        <em>Organization ID</em> and <em>API Key</em> manually.</li>
     <li>Click <strong>Test Connection</strong> to verify.</li>
+    <li>Download and install the <strong>CloudLinker client</strong> on each machine with a local printer
+        (available from the settings page or from
+        <a href="https://cloudlinker.eu/downloads" target="_blank">cloudlinker.eu/downloads</a>).</li>
     <li>Click <strong>Sync Printers</strong> to import your clients and printers.</li>
-    <li>Go to <strong>CloudLinker → Document Rules</strong> and configure the default printer
+    <li>Go to <strong>CloudLinker &rarr; Document Rules</strong> and configure the default printer
         for each document type.</li>
 </ol>
 
 <div class="note">
-    <strong>⚠️ Note:</strong> The document URL sent to the CloudLinker agent must be reachable
+    <strong>Note:</strong> The document URL sent to the CloudLinker agent must be reachable
     from the machine running the agent. If your Odoo server is on an internal network,
     make sure the <code>web.base.url</code> system parameter points to a URL accessible
     from those machines.
@@ -176,16 +189,16 @@
 <ul>
     <li>Uses the CloudLinker REST API with HTTP Basic Authentication</li>
     <li>PDF is rendered by Odoo and temporarily stored as an <code>ir.attachment</code></li>
-    <li>A secure one-time token URL is generated; the attachment is deleted after download</li>
-    <li>No base64 encoding — CloudLinker fetches the PDF directly via URL</li>
-    <li>Compatible with Odoo 16, 17, and 18 Community &amp; Enterprise</li>
+    <li>A secure one-time token URL is generated for the CloudLinker agent to fetch</li>
+    <li>No base64 encoding &mdash; CloudLinker fetches the PDF directly via URL</li>
+    <li>Compatible with Odoo 18 Community &amp; Enterprise</li>
 </ul>
 
 <h2>Support</h2>
 <p>
     Questions or issues? Contact us via
     <a href="https://cloudlinker.eu/contact" target="_blank">cloudlinker.eu/contact</a>
-    or email <a href="mailto:support@cloudlinker.com">support@cloudlinker.com</a>.
+    or email <a href="mailto:support@cloudlinker.eu">support@cloudlinker.eu</a>.
 </p>
 
 </body>

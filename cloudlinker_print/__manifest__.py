@@ -1,6 +1,6 @@
 {
     'name': 'CloudLinker Print',
-    'version': '1.1.0',
+    'version': '18.0.1.1.0',
     'category': 'Technical',
     'summary': 'Print documents on local printers via CloudLinker cloud print service',
     'description': """
