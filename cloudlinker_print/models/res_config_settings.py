@@ -25,6 +25,46 @@ class ResConfigSettings(models.TransientModel):
         help="Automatically send documents to CloudLinker when validated.",
     )
 
+    cloudlinker_windows_version = fields.Char(
+        string="Windows Version", readonly=True,
+        config_parameter="cloudlinker_print.windows_version",
+    )
+    cloudlinker_windows_url = fields.Char(
+        string="Windows Download URL", readonly=True,
+        config_parameter="cloudlinker_print.windows_url",
+    )
+    cloudlinker_linux_version = fields.Char(
+        string="Linux Version", readonly=True,
+        config_parameter="cloudlinker_print.linux_version",
+    )
+    cloudlinker_linux_url = fields.Char(
+        string="Linux Download URL", readonly=True,
+        config_parameter="cloudlinker_print.linux_url",
+    )
+
+    def action_cloudlinker_fetch_downloads(self):
+        """Fetch latest client download info from CloudLinker API (public endpoint)."""
+        self.ensure_one()
+        base_url = self.cloudlinker_base_url or "https://cloudlinker.eu/api"
+        ICP = self.env["ir.config_parameter"].sudo()
+        try:
+            for platform in ("windows", "linux"):
+                info = CloudLinkerService.get_client_version(base_url, platform)
+                ICP.set_param(
+                    f"cloudlinker_print.{platform}_version",
+                    info.get("latest_version") or "",
+                )
+                ICP.set_param(
+                    f"cloudlinker_print.{platform}_url",
+                    info.get("installer_url") or info.get("download_url") or "",
+                )
+        except CloudLinkerApiError as exc:
+            raise UserError(str(exc)) from exc
+        return {
+            "type": "ir.actions.client",
+            "tag": "reload",
+        }
+
     # ------------------------------------------------------------------
 
     def _cloudlinker_get_service(self):

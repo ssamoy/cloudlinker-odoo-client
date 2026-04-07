@@ -159,7 +159,7 @@ class CloudLinkerMixin(models.AbstractModel):
             "mimetype": "application/pdf",
             "description": f"cloudlinker_token:{token}",
         })
-        self.env.cr.flush()
+        self.env.flush_all()
         self.env.cr.commit()
 
         # Build the public URL

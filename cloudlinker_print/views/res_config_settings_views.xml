@@ -54,6 +54,35 @@
                             <field name="cloudlinker_auto_print"/>
                         </setting>
                     </block>
+                    <block title="Client Downloads"
+                           invisible="not cloudlinker_organization_id or not cloudlinker_api_key">
+                        <setting string="Download the CloudLinker client"
+                                 help="Fetch the latest version info and download links.">
+                            <div class="mt8">
+                                <button name="action_cloudlinker_fetch_downloads" type="object"
+                                        string="Check for updates" icon="fa-refresh"
+                                        class="btn btn-secondary mb-3"/>
+                            </div>
+                            <div invisible="not cloudlinker_windows_url" class="mb-2">
+                                <i class="fa fa-windows me-1"/>
+                                <strong>Windows</strong>
+                                <span class="text-muted ms-2">
+                                    v<field name="cloudlinker_windows_version" readonly="1" widget="char" class="d-inline"/>
+                                </span>
+                                <field name="cloudlinker_windows_url" widget="url" readonly="1"
+                                       text="Download" class="ms-2 d-inline"/>
+                            </div>
+                            <div invisible="not cloudlinker_linux_url">
+                                <i class="fa fa-linux me-1"/>
+                                <strong>Linux</strong>
+                                <span class="text-muted ms-2">
+                                    v<field name="cloudlinker_linux_version" readonly="1" widget="char" class="d-inline"/>
+                                </span>
+                                <field name="cloudlinker_linux_url" widget="url" readonly="1"
+                                       text="Download" class="ms-2 d-inline"/>
+                            </div>
+                        </setting>
+                    </block>
                     <block title="Actions">
                         <setting>
                             <button name="action_cloudlinker_test_connection" type="object"

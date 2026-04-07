@@ -151,6 +151,28 @@ class CloudLinkerService:
         return resp.get("data", [])
 
     # ------------------------------------------------------------------
+    # Client version / downloads
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def get_client_version(base_url, platform: str = "windows") -> dict:
+        """
+        GET /client/version?platform=windows|linux (public, no auth)
+        Returns {latest_version, download_url, checksum_sha256, release_notes}.
+        """
+        url = f"{base_url.rstrip('/')}/client/version"
+        try:
+            resp = requests.get(url, params={"platform": platform}, timeout=10)
+            resp.raise_for_status()
+            return resp.json()
+        except requests.HTTPError as exc:
+            raise CloudLinkerApiError(
+                f"CloudLinker [{exc.response.status_code}]: {exc.response.text}"
+            ) from exc
+        except requests.RequestException as exc:
+            raise CloudLinkerApiError(f"CloudLinker connection error: {exc}") from exc
+
+    # ------------------------------------------------------------------
     # Static helpers (no auth required)
     # ------------------------------------------------------------------
 
