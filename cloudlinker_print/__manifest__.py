@@ -1,6 +1,6 @@
 {
     'name': 'CloudLinker Print',
-    'version': '1.0.0',
+    'version': '1.1.0',
     'category': 'Technical',
     'summary': 'Print documents on local printers via CloudLinker cloud print service',
     'description': """
@@ -11,24 +11,28 @@ on local printers from the cloud — no drivers, no hassle.
 
 Features
 --------
+* Quick setup: login or register directly from Odoo settings
 * Configure your CloudLinker API key in Settings
 * Fetch and manage available printers
 * Assign default printers per document type
 * Print invoices, picking slips, shipping labels, QWeb reports and POS receipts
-* Manual printer override via wizard
+* Print sale orders / quotations
+* Manual printer override via wizard with copy count
+* Download CloudLinker client (Windows/Linux) from settings
 
 Supported document types
 -------------------------
 - Invoices & credit notes (account.move)
+- Sale orders & quotations (sale.order)
 - Picking / warehouse labels (stock.picking)
 - Shipping labels (stock.picking)
 - Custom QWeb reports (ir.actions.report)
 - POS receipts (pos.order)
 
-Compatibility: Odoo 16, 17, 18
+Compatibility: Odoo 18
     """,
     'author': 'CloudLinker',
-    'website': 'https://www.cloudlinker.io',
+    'website': 'https://www.cloudlinker.eu',
     'license': 'LGPL-3',
     'depends': [
         'base',
